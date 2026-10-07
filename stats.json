@@ -1,0 +1,361 @@
+{
+ "written_at": "2026-10-07 14:48 UTC",
+ "questions": 24943,
+ "lectures": 1219,
+ "lectures_wanted": 2342,
+ "courses": 50,
+ "courses_done": 29,
+ "workers": [],
+ "courses_list": [
+  {
+   "code": "ACC501",
+   "title": "Business Finance",
+   "built": 45,
+   "want": 45,
+   "questions": 986
+  },
+  {
+   "code": "BIO101",
+   "title": "Basic I-Biology",
+   "built": 0,
+   "want": 130,
+   "questions": 0
+  },
+  {
+   "code": "CS101",
+   "title": "Introduction to Computing",
+   "built": 45,
+   "want": 45,
+   "questions": 870
+  },
+  {
+   "code": "CS201",
+   "title": "Introduction to Programming",
+   "built": 0,
+   "want": 51,
+   "questions": 0
+  },
+  {
+   "code": "CS205",
+   "title": "Information Security",
+   "built": 0,
+   "want": 77,
+   "questions": 0
+  },
+  {
+   "code": "CS301",
+   "title": "Data Structures",
+   "built": 0,
+   "want": 47,
+   "questions": 0
+  },
+  {
+   "code": "CS302",
+   "title": "Digital Logic Design",
+   "built": 45,
+   "want": 45,
+   "questions": 990
+  },
+  {
+   "code": "CS304",
+   "title": "Object Oriented Programming",
+   "built": 0,
+   "want": 46,
+   "questions": 0
+  },
+  {
+   "code": "CS401",
+   "title": "Computer Architecture and Assembly Language Programming",
+   "built": 0,
+   "want": 46,
+   "questions": 0
+  },
+  {
+   "code": "CS402",
+   "title": "Theory of Automata",
+   "built": 46,
+   "want": 46,
+   "questions": 872
+  },
+  {
+   "code": "CS403",
+   "title": "Database Management Systems",
+   "built": 45,
+   "want": 45,
+   "questions": 1013
+  },
+  {
+   "code": "CS407",
+   "title": "Routing and Switching",
+   "built": 0,
+   "want": 168,
+   "questions": 0
+  },
+  {
+   "code": "CS408",
+   "title": "Human Computer Interaction",
+   "built": 45,
+   "want": 45,
+   "questions": 1125
+  },
+  {
+   "code": "CS502",
+   "title": "Fundamentals of Algorithms",
+   "built": 0,
+   "want": 48,
+   "questions": 0
+  },
+  {
+   "code": "CS504",
+   "title": "Software Engineering - I",
+   "built": 16,
+   "want": 45,
+   "questions": 307
+  },
+  {
+   "code": "CS604",
+   "title": "Operating Systems",
+   "built": 0,
+   "want": 47,
+   "questions": 0
+  },
+  {
+   "code": "CS605",
+   "title": "Software EngineeringII",
+   "built": 45,
+   "want": 45,
+   "questions": 928
+  },
+  {
+   "code": "CS614",
+   "title": "Data Warehousing",
+   "built": 0,
+   "want": 47,
+   "questions": 0
+  },
+  {
+   "code": "ECO401",
+   "title": "Economics",
+   "built": 43,
+   "want": 45,
+   "questions": 1012
+  },
+  {
+   "code": "ECO402",
+   "title": "Microeconomics",
+   "built": 45,
+   "want": 45,
+   "questions": 933
+  },
+  {
+   "code": "ECO404",
+   "title": "Managerial Economics",
+   "built": 45,
+   "want": 45,
+   "questions": 830
+  },
+  {
+   "code": "EDU406",
+   "title": "Critical Thinking and reflective Practice",
+   "built": 0,
+   "want": 16,
+   "questions": 0
+  },
+  {
+   "code": "ENG101",
+   "title": "English Comprehension",
+   "built": 45,
+   "want": 45,
+   "questions": 932
+  },
+  {
+   "code": "ENG201",
+   "title": "Business and Technical English Writing",
+   "built": 45,
+   "want": 45,
+   "questions": 947
+  },
+  {
+   "code": "ETH100",
+   "title": "Effective Citizenship",
+   "built": 0,
+   "want": 96,
+   "questions": 0
+  },
+  {
+   "code": "ETH202",
+   "title": "Ethics (for Non-Muslims)",
+   "built": 30,
+   "want": 30,
+   "questions": 572
+  },
+  {
+   "code": "GSC101",
+   "title": "General Science",
+   "built": 0,
+   "want": 45,
+   "questions": 0
+  },
+  {
+   "code": "ISL201",
+   "title": "Islamic Studies",
+   "built": 16,
+   "want": 16,
+   "questions": 247
+  },
+  {
+   "code": "MCM101",
+   "title": "Introduction to Mass Communication",
+   "built": 45,
+   "want": 45,
+   "questions": 904
+  },
+  {
+   "code": "MCM301",
+   "title": "Communication skills",
+   "built": 45,
+   "want": 45,
+   "questions": 939
+  },
+  {
+   "code": "MCM601",
+   "title": "Media Management",
+   "built": 15,
+   "want": 15,
+   "questions": 386
+  },
+  {
+   "code": "MGT101",
+   "title": "Financial Accounting",
+   "built": 18,
+   "want": 18,
+   "questions": 445
+  },
+  {
+   "code": "MGT211",
+   "title": "Introduction to Business",
+   "built": 14,
+   "want": 14,
+   "questions": 310
+  },
+  {
+   "code": "MGT301",
+   "title": "Principles of Marketing",
+   "built": 1,
+   "want": 13,
+   "questions": 26
+  },
+  {
+   "code": "MGT411",
+   "title": "Money & Banking",
+   "built": 0,
+   "want": 45,
+   "questions": 0
+  },
+  {
+   "code": "MGT501",
+   "title": "Human Resource Management",
+   "built": 45,
+   "want": 45,
+   "questions": 919
+  },
+  {
+   "code": "MGT502",
+   "title": "Organizational Behaviour",
+   "built": 45,
+   "want": 45,
+   "questions": 925
+  },
+  {
+   "code": "MGT503",
+   "title": "Principles of Management",
+   "built": 45,
+   "want": 45,
+   "questions": 959
+  },
+  {
+   "code": "MGT602",
+   "title": "Entrepreneurship",
+   "built": 45,
+   "want": 45,
+   "questions": 922
+  },
+  {
+   "code": "MGT610",
+   "title": "Business Ethics",
+   "built": 0,
+   "want": 28,
+   "questions": 0
+  },
+  {
+   "code": "MTH100",
+   "title": "General Mathematics",
+   "built": 0,
+   "want": 45,
+   "questions": 0
+  },
+  {
+   "code": "MTH202",
+   "title": "Discrete Mathematics",
+   "built": 0,
+   "want": 45,
+   "questions": 0
+  },
+  {
+   "code": "MTH302",
+   "title": "Business Mathematics & Statistics",
+   "built": 45,
+   "want": 45,
+   "questions": 834
+  },
+  {
+   "code": "PAK301",
+   "title": "Pakistan Studies",
+   "built": 30,
+   "want": 30,
+   "questions": 527
+  },
+  {
+   "code": "PHY101",
+   "title": "Physics",
+   "built": 45,
+   "want": 45,
+   "questions": 989
+  },
+  {
+   "code": "PSY101",
+   "title": "Introduction to Psychology",
+   "built": 45,
+   "want": 45,
+   "questions": 926
+  },
+  {
+   "code": "PSY405",
+   "title": "Personality Psychology",
+   "built": 45,
+   "want": 45,
+   "questions": 950
+  },
+  {
+   "code": "SOC101",
+   "title": "Introduction to Sociology",
+   "built": 45,
+   "want": 45,
+   "questions": 667
+  },
+  {
+   "code": "STA301",
+   "title": "Statistics and Probability",
+   "built": 45,
+   "want": 45,
+   "questions": 751
+  },
+  {
+   "code": "STA630",
+   "title": "Research Methods",
+   "built": 0,
+   "want": 53,
+   "questions": 0
+  }
+ ]
+}
