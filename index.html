@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quiz Pools</title>
+<style>
+  :root{
+    --bg:#0d1117; --card:#161b22; --line:#262d36;
+    --ink:#e6edf3; --ink-2:#9aa6b2; --ink-3:#6b7684;
+    --ok:#3fb950; --warn:#d29922; --accent:#4c8dff;
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --bg:#f6f8fa; --card:#fff; --line:#d8dee4;
+      --ink:#1f2328; --ink-2:#59636e; --ink-3:#848d97;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.55 ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif;
+       -webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:24px 16px 56px}
+  h1{font-size:19px;margin:0 0 3px;letter-spacing:-.2px}
+  .sub{color:var(--ink-3);font-size:12.5px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+        padding:17px 19px;margin-bottom:14px}
+  .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+  .k{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
+  .v{font-size:29px;font-weight:650;letter-spacing:-.8px;margin-top:3px;
+     font-variant-numeric:tabular-nums}
+  .n{font-size:12px;color:var(--ink-3);margin-top:2px}
+  .meter{height:8px;border-radius:999px;background:var(--line);overflow:hidden;margin-top:9px}
+  .meter > i{display:block;height:100%;background:var(--accent);border-radius:999px;
+             transition:width .6s cubic-bezier(.22,.61,.36,1)}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{text-align:left;font-weight:600;color:var(--ink-3);font-size:11px;
+     letter-spacing:.06em;text-transform:uppercase;padding:0 9px 8px 0}
+  td{padding:6px 9px 6px 0;border-top:1px solid var(--line)}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .mono{font-family:ui-monospace,"Cascadia Mono",Menlo,monospace}
+  .bar{width:104px;height:6px;border-radius:999px;background:var(--line);overflow:hidden}
+  .bar > i{display:block;height:100%;background:var(--accent)}
+  .bar.done > i{background:var(--ok)}
+  .dim{color:var(--ink-3)}
+  .scroll{max-height:44vh;overflow:auto}
+  #gate{display:flex;min-height:72vh;align-items:center;justify-content:center}
+  #gate .card{width:300px;text-align:center}
+  input{width:100%;padding:9px 11px;border-radius:8px;border:1px solid var(--line);
+        background:var(--bg);color:var(--ink);font-size:15px;margin:11px 0 9px}
+  button{width:100%;padding:9px;border-radius:8px;border:0;background:var(--accent);
+         color:#fff;font-size:14px;font-weight:600;cursor:pointer}
+  .err{color:var(--warn);font-size:12.5px;min-height:17px}
+  .note{color:var(--ink-3);font-size:11.5px;margin-top:11px;line-height:1.5}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="card">
+    <div class="k">VU Quiz Pools</div>
+    <input id="pw" type="password" placeholder="password" autocomplete="off">
+    <button onclick="tryIn()">Open</button>
+    <div class="err" id="err"></div>
+    <div class="note">
+      This is a curtain, not a lock: the page is public and anyone who reads
+      its source can walk past it. There is nothing behind it worth taking -
+      counts only, no questions and no keys.
+    </div>
+  </div>
+</div>
+
+<div class="wrap" id="app" style="display:none">
+  <h1>Quiz pools</h1>
+  <div class="sub" id="when">reading…</div>
+
+  <div class="grid" style="margin-top:18px">
+    <div class="card"><div class="k">Questions</div>
+      <div class="v" id="qs">—</div><div class="n" id="qsN"></div></div>
+    <div class="card"><div class="k">Lectures</div>
+      <div class="v" id="lec">—</div>
+      <div class="meter"><i id="meter" style="width:0"></i></div>
+      <div class="n" id="lecN"></div></div>
+    <div class="card"><div class="k">Courses finished</div>
+      <div class="v" id="cf">—</div><div class="n" id="cfN"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="k" style="margin-bottom:11px">The four accounts</div>
+    <table id="fleet"></table>
+  </div>
+
+  <div class="card">
+    <div class="k" style="margin-bottom:11px">Courses</div>
+    <div class="scroll"><table id="courses"></table></div>
+  </div>
+
+  <div class="sub">
+    Counts only. The questions themselves, the handouts and every key stay in
+    the private repository and never reach this page.
+  </div>
+</div>
+
+<script>
+/* A password on a public page keeps a casual reader out and nothing else.
+   It is written here in the open on purpose: pretending otherwise would be
+   worse than saying so. Everything this page shows is a count. */
+const PASS = "abc123";
+const $ = id => document.getElementById(id);
+
+function tryIn(){
+  if($("pw").value.trim() !== PASS){ $("err").textContent = "Not that one."; return; }
+  try{ sessionStorage.setItem("vu-open", "1"); }catch(e){}
+  open_();
+}
+$("pw") && $("pw").addEventListener("keydown", e => { if(e.key === "Enter") tryIn(); });
+try{ if(sessionStorage.getItem("vu-open") === "1") open_(); }catch(e){}
+
+function open_(){
+  $("gate").style.display = "none";
+  $("app").style.display = "";
+  load();
+  setInterval(load, 120000);
+}
+
+const n = x => (x == null ? "—" : Number(x).toLocaleString("en-US"));
+
+async function load(){
+  let d;
+  try{
+    d = await (await fetch("stats.json?t=" + Date.now(), {cache: "no-store"})).json();
+  }catch(e){
+    $("when").textContent = "could not read stats.json";
+    return;
+  }
+  $("when").textContent = "last written " + (d.written_at || "—")
+    + " · rewritten at the end of every cloud run";
+
+  $("qs").textContent = n(d.questions);
+  $("qsN").textContent = d.lectures ? Math.round(d.questions / d.lectures) + " per lecture" : "";
+  $("lec").textContent = n(d.lectures);
+  const p = d.lectures_wanted ? 100 * d.lectures / d.lectures_wanted : 0;
+  $("meter").style.width = Math.min(100, p) + "%";
+  $("lecN").textContent = `of ${n(d.lectures_wanted)} · ${p.toFixed(1)}%`;
+  $("cf").textContent = `${d.courses_done}/${d.courses}`;
+  $("cfN").textContent = `${d.courses - d.courses_done} still to build`;
+
+  $("fleet").innerHTML = `
+    <thead><tr><th style="width:68px">Worker</th><th>Account</th>
+      <th class="num" style="width:72px">Last run</th><th style="width:150px">Finished</th></tr></thead>
+    <tbody>${(d.workers || []).map(w => `<tr>
+      <td class="mono">${w.shard || "?"}</td>
+      <td class="dim">${(w.account || "?").replace(/</g, "&lt;")}</td>
+      <td class="num mono">#${w.run || "?"}</td>
+      <td class="dim">${w.finished_at || "?"}</td></tr>`).join("")
+      || `<tr><td colspan="4" class="dim">No worker has reported yet.</td></tr>`}</tbody>`;
+
+  $("courses").innerHTML = `
+    <thead><tr><th style="width:82px">Course</th><th>Title</th>
+      <th style="width:112px">Progress</th>
+      <th class="num" style="width:78px">Lectures</th>
+      <th class="num" style="width:84px">Questions</th></tr></thead>
+    <tbody>${(d.courses_list || []).map(c => {
+      const pc = c.want ? Math.min(100, 100 * c.built / c.want) : 0;
+      const done = c.want && c.built >= c.want;
+      return `<tr>
+        <td class="mono">${c.code}</td>
+        <td class="${done ? "dim" : ""}">${(c.title || "").replace(/</g, "&lt;")}</td>
+        <td><div class="bar${done ? " done" : ""}"><i style="width:${pc.toFixed(1)}%"></i></div></td>
+        <td class="num mono">${c.want ? c.built + "/" + c.want : "—"}</td>
+        <td class="num mono">${c.questions || "—"}</td></tr>`;
+    }).join("")}</tbody>`;
+}
+</script>
+</body>
+</html>
